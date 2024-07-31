@@ -131,7 +131,7 @@ $custom_repo = [
 	"type" => "composer",
 	"url" => "https://lang-php.s3.us-east-1.amazonaws.com/dist-heroku-20-stable/"
 ];
-array_unshift($repositories, $custom_repo);
+array_push($repositories, $custom_repo);
 
 $json = json_decode(file_get_contents($COMPOSER), true);
 if (!is_array($json)) exit(1);
