@@ -129,7 +129,7 @@ foreach (array_reverse($argv) as $repo) {
 // Add custom repository URL for PHP 7.2
 $custom_repo = [
 	"type" => "composer",
-	"url" => "https://lang-php.s3.us-east-1.amazonaws.com/dist-heroku-22-stable/"
+	"url" => "https://lang-php.s3.us-east-1.amazonaws.com/dist-heroku-20-stable/"
 ];
 array_unshift($repositories, $custom_repo);
 
