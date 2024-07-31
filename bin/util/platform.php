@@ -1,4 +1,5 @@
 #!/usr/bin/env php
+#!/usr/bin/env php
 <?php
 
 $COMPOSER = getenv("COMPOSER") ?: "composer.json";
@@ -125,6 +126,13 @@ foreach (array_reverse($argv) as $repo) {
 
 	$repositories[] = $repo;
 }
+
+// Add custom repository URL for PHP 7.2
+$custom_repo = [
+	"type" => "composer",
+	"url" => "https://lang-php.s3.us-east-1.amazonaws.com/dist-heroku-22-stable/"
+];
+array_unshift($repositories, $custom_repo);
 
 $json = json_decode(file_get_contents($COMPOSER), true);
 if (!is_array($json)) exit(1);
