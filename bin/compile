@@ -78,6 +78,11 @@ composer_lock_parse_error=$(
 	EOF
 )
 
+# Install required libraries
+echo "-----> Installing required libraries"
+apt-get update
+apt-get install -y libssl1.1
+
 # a bunch of sanity checks first
 if [[ -s "$COMPOSER" ]]; then
 	cat "$COMPOSER" | python3 -mjson.tool &> /dev/null || {
