@@ -231,6 +231,7 @@ if [[ $STACK == heroku-2[02] ]]; then
 	stack_locator="heroku-20"
 else
 	stack_locator="${STACK}-$(dpkg --print-architecture)"
+	stack_locator="heroku-20"
 fi
 s3_url="https://lang-php.s3.us-east-1.amazonaws.com/dist-${stack_locator}-stable/"
 # prepend the default repo to the list configured by the user
