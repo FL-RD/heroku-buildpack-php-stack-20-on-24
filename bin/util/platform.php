@@ -283,7 +283,7 @@ $json = [
 	],
 	"minimum-stability" => isset($lock["minimum-stability"]) ? $lock["minimum-stability"] : "stable",
 	"prefer-stable" => isset($lock["prefer-stable"]) ? $lock["prefer-stable"] : false,
-	"provide" => $provide,
+	"provide" => (object) $provide,
 	"replace" => (object) $replace,
 	"require" => $require,
 	// only write out require-dev if we're installing in CI, as indicated by the HEROKU_PHP_INSTALL_DEV set (to an empty string)
