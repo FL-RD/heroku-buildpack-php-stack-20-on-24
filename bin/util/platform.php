@@ -257,8 +257,7 @@ $require["heroku-sys/apache"] = "^2.4.10";
 $require["heroku-sys/nginx"] = "^1.8.0";
 
 preg_match("#^([^-]+)(?:-([0-9]+))?\$#", $STACK, $stack);
-$provide = ["heroku-sys/" . $stack[1] => ((isset($stack[2]) ? $stack[2] : "1") . gmdate(".Y.m.d"))]; # heroku: 20.2021.02.04 etc
-$provide["heroku-sys/heroku"] = "20.0.0";
+$provide = ["heroku-sys/" . $stack[1] => (isset($stack[2]) ? $stack[2] : "1") . gmdate(".Y.m.d")]; # heroku: 20.2021.02.04 etc
 
 $replace = [];
 // check whether the blackfire CLI is already there (from their https://github.com/blackfireio/integration-heroku buildpack)
@@ -281,7 +280,7 @@ $json = [
 	],
 	"minimum-stability" => isset($lock["minimum-stability"]) ? $lock["minimum-stability"] : "stable",
 	"prefer-stable" => isset($lock["prefer-stable"]) ? $lock["prefer-stable"] : false,
-	"provide" => (object) $provide,
+	"provide" => $provide,
 	"replace" => (object) $replace,
 	"require" => $require,
 	// only write out require-dev if we're installing in CI, as indicated by the HEROKU_PHP_INSTALL_DEV set (to an empty string)
