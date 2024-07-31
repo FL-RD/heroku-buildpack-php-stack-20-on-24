@@ -227,7 +227,8 @@ mkdir -p $COMPOSER_HOME
 status "Bootstrapping..."
 
 if [[ $STACK == heroku-2[02] ]]; then
-	stack_locator=$STACK
+	# stack_locator=$STACK
+	stack_locator="heroku-20"
 else
 	stack_locator="${STACK}-$(dpkg --print-architecture)"
 fi
