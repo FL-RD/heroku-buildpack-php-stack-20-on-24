@@ -423,8 +423,8 @@ if [ -f "$build_dir/bin/apt-repositories.sh" ]; then
     source "$build_dir/bin/apt-repositories.sh"
 fi
 
-# Import GPG keys
-gpg --no-default-keyring --keyring $build_dir/.apt/keyrings/ubuntu-keyring.gpg --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+# Download the GPG key manually
+curl -sS https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3B4FE6ACC0B21F32 | gpg --dearmor > $build_dir/.apt/keyrings/ubuntu-keyring.gpg
 
 # Create a sources.list file with the new keyring
 echo "deb [signed-by=$build_dir/.apt/keyrings/ubuntu-keyring.gpg] http://security.ubuntu.com/ubuntu bionic-security main" > $build_dir/.apt/sources.list
