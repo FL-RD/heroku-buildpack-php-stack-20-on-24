@@ -439,7 +439,7 @@ apt-get -o Dir::Etc::sourcelist=$build_dir/.apt/sources.list \
        update
 
 # Download libssl1.1 package manually from a different URL
-curl -fsSL http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.13_amd64.deb -o $build_dir/libssl1.1.deb
+curl -fsSL http://ports.ubuntu.com/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_arm64.deb -o $build_dir/libssl1.1.deb
 
 # Extract libssl1.1 package
 dpkg-deb -x $build_dir/libssl1.1.deb $build_dir/.apt
