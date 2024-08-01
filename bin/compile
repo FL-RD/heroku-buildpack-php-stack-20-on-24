@@ -424,7 +424,7 @@ if [ -f "$build_dir/bin/apt-repositories.sh" ]; then
 fi
 
 # Download the GPG key manually
-curl -fsSL https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3B4FE6ACC0B21F32 | gpg --dearmor > $build_dir/.apt/keyrings/ubuntu-keyring.gpg
+curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3B4FE6ACC0B21F32" | gpg --dearmor > $build_dir/.apt/keyrings/ubuntu-keyring.gpg
 
 # Create a sources.list file with the new keyring
 echo "deb [signed-by=$build_dir/.apt/keyrings/ubuntu-keyring.gpg] http://security.ubuntu.com/ubuntu bionic-security main" > $build_dir/.apt/sources.list
