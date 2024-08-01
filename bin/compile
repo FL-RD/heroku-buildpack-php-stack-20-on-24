@@ -417,10 +417,23 @@ if [ -f "$build_dir/bin/apt-repositories.sh" ]; then
     echo "Adding custom APT repositories..."
     source "$build_dir/bin/apt-repositories.sh"
 fi
-# Use the temporary sources.list for installing packages
-apt-get update -o Dir::Etc::sourcelist=/tmp/sources.list -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"
-apt-get install -y libssl1.1
+# Create temporary directories for apt-get
+mkdir -p /tmp/apt/lists/partial
+mkdir -p /tmp/apt/cache
 
+# Use the temporary sources.list for installing packages
+apt-get -o Dir::Etc::sourcelist=/tmp/sources.list \
+       -o Dir::Etc::sourceparts="-" \
+       -o Dir::State::Lists=/tmp/apt/lists \
+       -o Dir::State::Lists::Temporary=/tmp/apt/lists/partial \
+       -o Dir::Cache=/tmp/apt/cache \
+       update
+
+apt-get -o Dir::State::Lists=/tmp/apt/lists \
+       -o Dir::State::Lists::Temporary=/tmp/apt/lists/partial \
+       -o Dir::Cache=/tmp/apt/cache \
+       install -y libssl1.1
+	   
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
 export COMPOSER=composer.json
