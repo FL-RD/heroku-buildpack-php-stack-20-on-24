@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-echo "HEROKU_APP_NAME: ${HEROKU_APP_NAME}"
-echo "HEROKU_APP_NAME: ${APP_NAME}"
-echo "BUILDPACK_REPOSITORY_USERNAME is ${BUILDPACK_REPOSITORY_USERNAME}"
-
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
 # fail hard
@@ -445,6 +441,8 @@ fi
 
 # echo "LD_LIBRARY_PATH set to: $LD_LIBRARY_PATH"
 
+echo $env_dir
+echo $env_dir.BUILDPACK_REPOSITORY_USERNAME
 repositoryUsername=${BUILDPACK_REPOSITORY_USERNAME}
 repositoryPassword=${BUILDPACK_REPOSITORY_PASSWORD}
 
