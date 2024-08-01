@@ -130,7 +130,7 @@ foreach (array_reverse($argv) as $repo) {
 $custom_php_repo = [
 	"type" => "composer",
 	// "url" => "https://lang-php.s3.us-east-1.amazonaws.com/dist-heroku-20-stable/",
-	"url" => "https://github.com/FL-RD/heroku-buildpack-php/packages-json/dist-heroku-20-stable/",
+	"url" => "https://github.com/FL-RD/heroku-buildpack-php/blob/main/packages-json/dist-heroku-20-stable/",
 	"only" => ["heroku-sys/php"]
 ];
 array_unshift($repositories, $custom_php_repo);
