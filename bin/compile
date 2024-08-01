@@ -441,6 +441,26 @@ fi
 
 # echo "LD_LIBRARY_PATH set to: $LD_LIBRARY_PATH"
 
+repositoryUsername=$BUILDPACK_REPOSITORY_USERNAME
+repositoryPassword=$BUILDPACK_REPOSITORY_PASSWORD
+
+authJson=$(cat <<-END
+{
+    "http-basic": {
+        "dkbc1jgcmso4w.cloudfront.net": {
+            "username": "$repositoryUsername",
+            "password": "$repositoryPassword"
+        }
+    }
+}
+END
+)
+
+composerDir="$build_dir/.composer"
+mkdir -p "$composerDir"
+authFile="$composerDir/auth.json"
+echo "$authJson" > "$authFile"
+
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
 export COMPOSER=composer.json
