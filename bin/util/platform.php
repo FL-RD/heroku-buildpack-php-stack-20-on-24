@@ -103,7 +103,8 @@ foreach (array_reverse($argv) as $repo) {
 		);
 	}
 	// $repo = ["type" => "composer", "url" => $repo];
-	$repo = ["type" => "composer", "url" => "https://fl-rd.github.io/heroku-buildpack-php/packages-json/dist-heroku-20-stable/"];
+	// $repo = ["type" => "composer", "url" => "https://fl-rd.github.io/heroku-buildpack-php/packages-json/dist-heroku-20-stable/"];
+	$repo = ["type" => "composer", "url" => "https://dkbc1jgcmso4w.cloudfront.net/lang-php/dist-heroku-20-stable/"];
 	// allow control of https://getcomposer.org/doc/articles/repository-priorities.md via query args "composer-repository-canonical", "composer-repository-exclude" and "composer-repository-only"
 	if (isset($url["query"])) {
 		parse_str($url["query"], $query); // parse query string into array
