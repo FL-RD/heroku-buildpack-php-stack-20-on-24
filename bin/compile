@@ -445,11 +445,8 @@ curl -fsSL http://ports.ubuntu.com/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2
 dpkg-deb -x $build_dir/libssl1.1.deb $build_dir/.apt
 
 # Make sure that the extracted libraries are in the correct place
-if [ -z "$LD_LIBRARY_PATH" ]; then
-    export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib/x86_64-linux-gnu
-else
-    export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
-fi
+LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$build_dir/.apt/usr/lib/x86_64-linux-gnu"
+export LD_LIBRARY_PATH
 
 # Proceed with the rest of the compile script
 # (add the remaining part of your compile script here)
