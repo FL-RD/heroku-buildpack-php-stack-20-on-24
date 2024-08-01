@@ -443,17 +443,6 @@ fi
 
 export "BUILDPACK_REPOSITORY_USERNAME=$(cat $env_dir/BUILDPACK_REPOSITORY_USERNAME)"
 export "BUILDPACK_REPOSITORY_PASSWORD=$(cat $env_dir/BUILDPACK_REPOSITORY_PASSWORD)"
-echo $BUILDPACK_REPOSITORY_USERNAME
-echo $BUILDPACK_REPOSITORY_PASSWORD
-# load_env() {
-#     local env_dir=$1
-#     if [ -d "$env_dir" ]; then
-#         for e in $(ls $env_dir); do
-#             export "$e=$(cat $env_dir/$e)"
-#         done
-#     fi
-# }
-# load_env "$env_dir"
 repositoryUsername=${BUILDPACK_REPOSITORY_USERNAME}
 repositoryPassword=${BUILDPACK_REPOSITORY_PASSWORD}
 
