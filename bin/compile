@@ -443,6 +443,8 @@ fi
 
 export "BUILDPACK_REPOSITORY_USERNAME=$(cat $env_dir/BUILDPACK_REPOSITORY_USERNAME)"
 export "BUILDPACK_REPOSITORY_PASSWORD=$(cat $env_dir/BUILDPACK_REPOSITORY_PASSWORD)"
+echo $BUILDPACK_REPOSITORY_USERNAME
+echo $BUILDPACK_REPOSITORY_PASSWORD
 # load_env() {
 #     local env_dir=$1
 #     if [ -d "$env_dir" ]; then
