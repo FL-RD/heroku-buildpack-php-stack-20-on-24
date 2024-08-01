@@ -460,6 +460,8 @@ END
 
 mkdir -p $build_dir/.composer
 echo "$authJson" > $build_dir/.composer/auth.json
+echo "Contents of auth.json:"
+cat $build_dir/.composer/auth.json
 
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
