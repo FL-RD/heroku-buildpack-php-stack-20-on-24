@@ -441,7 +441,7 @@ apt-get -o Dir::Etc::sourcelist=$build_dir/.apt/sources.list \
 apt-get -o Dir::State::Lists=$build_dir/.apt/lists \
        -o Dir::State::Lists::Temporary=$build_dir/.apt/lists/partial \
        -o Dir::Cache=$build_dir/.apt/cache \
-       install -y libssl1.1
+       install -y --allow-unauthenticated libssl1.1
 
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
