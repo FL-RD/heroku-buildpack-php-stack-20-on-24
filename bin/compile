@@ -417,9 +417,13 @@ if [ -f "$build_dir/bin/apt-repositories.sh" ]; then
     echo "Adding custom APT repositories..."
     source "$build_dir/bin/apt-repositories.sh"
 fi
+
 # Create temporary directories for apt-get
 mkdir -p /tmp/apt/lists/partial
 mkdir -p /tmp/apt/cache
+
+# Import GPG keys
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
 
 # Use the temporary sources.list for installing packages
 apt-get -o Dir::Etc::sourcelist=/tmp/sources.list \
@@ -433,7 +437,7 @@ apt-get -o Dir::State::Lists=/tmp/apt/lists \
        -o Dir::State::Lists::Temporary=/tmp/apt/lists/partial \
        -o Dir::Cache=/tmp/apt/cache \
        install -y libssl1.1
-	   
+
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
 export COMPOSER=composer.json
