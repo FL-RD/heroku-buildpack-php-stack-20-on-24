@@ -423,8 +423,12 @@ if [ -f "$build_dir/bin/apt-repositories.sh" ]; then
     source "$build_dir/bin/apt-repositories.sh"
 fi
 
+# Add GPG key for the custom repository
+gpg --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+gpg --export 3B4FE6ACC0B21F32 > $build_dir/.apt/keyrings/ubuntu-keyring.gpg
+
 # Create a sources.list file with the new keyring
-echo "deb [trusted=yes] http://security.ubuntu.com/ubuntu bionic-security main" > $build_dir/.apt/sources.list
+echo "deb [signed-by=$build_dir/.apt/keyrings/ubuntu-keyring.gpg] http://security.ubuntu.com/ubuntu bionic-security main" > $build_dir/.apt/sources.list
 
 # Use the custom sources.list for apt-get commands
 apt-get -o Dir::Etc::sourcelist=$build_dir/.apt/sources.list \
