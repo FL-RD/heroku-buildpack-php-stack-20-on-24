@@ -446,20 +446,15 @@ export "BUILDPACK_REPOSITORY_PASSWORD=$(cat $env_dir/BUILDPACK_REPOSITORY_PASSWO
 repositoryUsername=${BUILDPACK_REPOSITORY_USERNAME}
 repositoryPassword=${BUILDPACK_REPOSITORY_PASSWORD}
 
-authJson=$(cat <<-END
-{
+mkdir -p $build_dir/.composer
+echo '{
     "http-basic": {
         "dkbc1jgcmso4w.cloudfront.net": {
-            "username": "$repositoryUsername",
-            "password": "$repositoryPassword"
+            "username": "'"${BUILDPACK_REPOSITORY_USERNAME}"'",
+            "password": "'"${BUILDPACK_REPOSITORY_PASSWORD}"'"
         }
     }
-}
-END
-)
-
-mkdir -p $build_dir/.composer
-echo "$authJson" > $build_dir/.composer/auth.json
+}' > $build_dir/.composer/auth.json
 
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
