@@ -441,8 +441,15 @@ fi
 
 # echo "LD_LIBRARY_PATH set to: $LD_LIBRARY_PATH"
 
-echo $env_dir
-echo $env_dir/BUILDPACK_REPOSITORY_USERNAME
+load_env() {
+    local env_dir=$1
+    if [ -d "$env_dir" ]; then
+        for e in $(ls $env_dir); do
+            export "$e=$(cat $env_dir/$e)"
+        done
+    fi
+}
+load_env "$env_dir"
 repositoryUsername=${BUILDPACK_REPOSITORY_USERNAME}
 repositoryPassword=${BUILDPACK_REPOSITORY_PASSWORD}
 
