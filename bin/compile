@@ -450,16 +450,16 @@ authJson=$(cat <<-END
 {
     "http-basic": {
         "dkbc1jgcmso4w.cloudfront.net": {
-            "username": "$repositoryUsername",
-            "password": "$repositoryPassword"
+            "username": $repositoryUsername,
+            "password": $repositoryPassword
         }
     }
 }
 END
 )
 
-# mkdir -p $build_dir/.heroku/php/.composer
-# echo "$authJson" > $build_dir/.heroku/php/.composer/auth.json
+mkdir -p $build_dir/.composer
+echo "$authJson" > $build_dir/.composer/auth.json
 
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
