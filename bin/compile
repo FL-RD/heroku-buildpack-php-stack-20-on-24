@@ -424,8 +424,8 @@ if [ -f "$build_dir/bin/apt-repositories.sh" ]; then
 fi
 
 # Initialize LD_LIBRARY_PATH if it is not set
+LD_LIBRARY_PATH=${LD_LIBRARY_PATH:-""}
 export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib:$LD_LIBRARY_PATH
-
 echo "LD_LIBRARY_PATH set to: $LD_LIBRARY_PATH"
 
 # reset $COMPOSER for the platform install step
