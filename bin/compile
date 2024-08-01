@@ -424,7 +424,7 @@ if [ -f "$build_dir/bin/apt-repositories.sh" ]; then
 fi
 
 # Initialize LD_LIBRARY_PATH if it is not set
-if [ -z "${LD_LIBRARY_PATH}" ]; then
+if [ -z "${LD_LIBRARY_PATH:-}" ]; then
   export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib:$build_dir/.apt/lib/x86_64-linux-gnu
 else
   export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib:$build_dir/.apt/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
