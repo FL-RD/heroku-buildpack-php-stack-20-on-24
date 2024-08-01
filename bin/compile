@@ -458,8 +458,8 @@ authJson=$(cat <<-END
 END
 )
 
-mkdir -p $build_dir/.heroku/php/.composer
-echo "$authJson" > $build_dir/.heroku/php/.composer/auth.json
+# mkdir -p $build_dir/.heroku/php/.composer
+# echo "$authJson" > $build_dir/.heroku/php/.composer/auth.json
 
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
