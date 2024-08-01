@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "HEROKU_APP_NAME: ${HEROKU_APP_NAME}"
+echo "HEROKU_APP_NAME: ${APP_NAME}"
 echo "BUILDPACK_REPOSITORY_USERNAME is ${BUILDPACK_REPOSITORY_USERNAME}"
 
 # bin/compile <build-dir> <cache-dir> <env-dir>
