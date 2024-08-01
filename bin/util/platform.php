@@ -136,7 +136,8 @@ $custom_php_repo = [
 		"heroku-sys/ext-redis",
 		"heroku-sys/ext-memcached",
 		"heroku-sys/apache",
-		"heroku-sys/composer-plugin-api"
+		"heroku-sys/composer-plugin-api",
+		"heroku-sys/ext-openssl",
 	]
 ];
 array_unshift($repositories, $custom_php_repo);
