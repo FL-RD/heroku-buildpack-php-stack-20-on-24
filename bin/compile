@@ -449,7 +449,7 @@ repositoryPassword=${BUILDPACK_REPOSITORY_PASSWORD}
 authJson=$(cat <<-END
 {
     "http-basic": {
-        "dkbc1jgcmso4w.cloudfront.net": {
+        "https://dkbc1jgcmso4w.cloudfront.net": {
             "username": "$repositoryUsername",
             "password": "$repositoryPassword"
         }
