@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+if [ -z "$BUILDPACK_REPOSITORY_PASSWORD" ]; then
+    echo "Error: BUILDPACK_REPOSITORY_PASSWORD environment variable is not set."
+    exit 1
+fi
+if [ -z "$BUILDPACK_REPOSITORY_USERNAME" ]; then
+    echo "Error: BUILDPACK_REPOSITORY_USERNAME environment variable is not set."
+    exit 1
+fi
+
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
 # fail hard
