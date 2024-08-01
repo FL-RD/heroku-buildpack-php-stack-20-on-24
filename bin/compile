@@ -423,6 +423,11 @@ if [ -f "$build_dir/bin/apt-repositories.sh" ]; then
     source "$build_dir/bin/apt-repositories.sh"
 fi
 
+echo "Downloading libicu66..."
+curl -L -o $build_dir/libicu66.deb http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu66_66.1-2ubuntu2_amd64.deb
+dpkg-deb -x $build_dir/libicu66.deb $build_dir/.apt
+rm $build_dir/libicu66.deb
+
 # Initialize LD_LIBRARY_PATH if it is not set
 if [ -z "${LD_LIBRARY_PATH:-}" ]; then
   export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib:$build_dir/.apt/lib/x86_64-linux-gnu
