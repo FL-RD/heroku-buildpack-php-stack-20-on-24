@@ -131,7 +131,7 @@ $custom_php_repo = [
 	"type" => "composer",
 	// "url" => "https://lang-php.s3.us-east-1.amazonaws.com/dist-heroku-20-stable/",
 	"url" => "https://fl-rd.github.io/heroku-buildpack-php/packages-json/dist-heroku-20-stable/",
-	"only" => ["heroku-sys/php", "heroku-sys/ext-redis"]
+	"only" => ["heroku-sys/php", "heroku-sys/ext-redis", "heroku-sys/ext-memcached"]
 ];
 array_unshift($repositories, $custom_php_repo);
 
