@@ -438,14 +438,18 @@ apt-get -o Dir::Etc::sourcelist=$build_dir/.apt/sources.list \
        -o Dir::Cache=$build_dir/.apt/cache \
        update
 
-# Download libssl1.1 package manually from a different URL
+# Download libssl1.1 package manually from the given URL
 curl -fsSL http://ports.ubuntu.com/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_arm64.deb -o $build_dir/libssl1.1.deb
 
 # Extract libssl1.1 package
 dpkg-deb -x $build_dir/libssl1.1.deb $build_dir/.apt
 
 # Make sure that the extracted libraries are in the correct place
-export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+if [ -z "$LD_LIBRARY_PATH" ]; then
+    export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib/x86_64-linux-gnu
+else
+    export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+fi
 
 # Proceed with the rest of the compile script
 # (add the remaining part of your compile script here)
