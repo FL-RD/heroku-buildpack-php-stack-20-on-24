@@ -421,16 +421,16 @@ fi
 # Create temporary directories for apt-get
 mkdir -p /tmp/apt/lists/partial
 mkdir -p /tmp/apt/cache
-mkdir -p /etc/apt/keyrings
+mkdir -p $build_dir/.apt/keyrings
 
 # Import GPG keys
 gpg --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
-gpg --export --armor 3B4FE6ACC0B21F32 > /etc/apt/keyrings/ubuntu-keyring.gpg
+gpg --export --armor 3B4FE6ACC0B21F32 > $build_dir/.apt/keyrings/ubuntu-keyring.gpg
 
-echo "deb [signed-by=/etc/apt/keyrings/ubuntu-keyring.gpg] http://security.ubuntu.com/ubuntu bionic-security main" > /etc/apt/sources.list.d/bionic-security.list
+echo "deb [signed-by=$build_dir/.apt/keyrings/ubuntu-keyring.gpg] http://security.ubuntu.com/ubuntu bionic-security main" > $build_dir/.apt/sources.list
 
 # Use the temporary sources.list for installing packages
-apt-get -o Dir::Etc::sourcelist=/tmp/sources.list \
+apt-get -o Dir::Etc::sourcelist=$build_dir/.apt/sources.list \
        -o Dir::Etc::sourceparts="-" \
        -o Dir::State::Lists=/tmp/apt/lists \
        -o Dir::State::Lists::Temporary=/tmp/apt/lists/partial \
