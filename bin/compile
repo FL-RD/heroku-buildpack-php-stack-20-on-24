@@ -446,15 +446,20 @@ export "BUILDPACK_REPOSITORY_PASSWORD=$(cat $env_dir/BUILDPACK_REPOSITORY_PASSWO
 repositoryUsername=${BUILDPACK_REPOSITORY_USERNAME}
 repositoryPassword=${BUILDPACK_REPOSITORY_PASSWORD}
 
-mkdir -p $build_dir/.composer
-echo '{
+authJson=$(cat <<-END
+{
     "http-basic": {
         "dkbc1jgcmso4w.cloudfront.net": {
-            "username": "'"${BUILDPACK_REPOSITORY_USERNAME}"'",
-            "password": "'"${BUILDPACK_REPOSITORY_PASSWORD}"'"
+            "username": "$repositoryUsername",
+            "password": "$repositoryPassword"
         }
     }
-}' > $build_dir/.composer/auth.json
+}
+END
+)
+
+mkdir -p $build_dir/.heroku/php/.composer
+echo "$authJson" > $build_dir/.heroku/php/.composer/auth.json
 
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
