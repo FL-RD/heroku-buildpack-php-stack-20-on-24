@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "BUILDPACK_REPOSITORY_USERNAME is ${BUILDPACK_REPOSITORY_USERNAME}"
+echo "BUILDPACK_REPOSITORY_USERNAME is ${$BUILDPACK_REPOSITORY_USERNAME}"
 
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
