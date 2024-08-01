@@ -423,33 +423,8 @@ if [ -f "$build_dir/bin/apt-repositories.sh" ]; then
     source "$build_dir/bin/apt-repositories.sh"
 fi
 
-# Add GPG key for the custom repository
-gpg --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
-gpg --export 3B4FE6ACC0B21F32 > $build_dir/.apt/keyrings/ubuntu-keyring.gpg
-
-# Create a sources.list file with the new keyring
-echo "deb [signed-by=$build_dir/.apt/keyrings/ubuntu-keyring.gpg] http://security.ubuntu.com/ubuntu bionic-security main" > $build_dir/.apt/sources.list
-
-# Use the custom sources.list for apt-get commands
-apt-get -o Dir::Etc::sourcelist=$build_dir/.apt/sources.list \
-       -o Dir::Etc::sourceparts="-" \
-       -o Dir::State::Lists=$build_dir/.apt/lists \
-       -o Dir::State::Lists::Temporary=$build_dir/.apt/lists/partial \
-       -o Dir::Cache=$build_dir/.apt/cache \
-       update
-
-# Download libssl1.1 package manually from the given URL
-curl -fsSL http://ports.ubuntu.com/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb -o $build_dir/libssl1.1.deb
-
-# Extract libssl1.1 package
-dpkg-deb -x $build_dir/libssl1.1.deb $build_dir/.apt
-
-# Make sure that the extracted libraries are in the correct place
-LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$build_dir/.apt/usr/lib/x86_64-linux-gnu"
-export LD_LIBRARY_PATH
-
-# Proceed with the rest of the compile script
-# (add the remaining part of your compile script here)
+# Manually install libssl1.1
+dpkg -i $build_dir/libssl1.1.deb
 
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
