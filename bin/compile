@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-if [ -z "$BUILDPACK_REPOSITORY_PASSWORD" ]; then
-    echo "Error: BUILDPACK_REPOSITORY_PASSWORD environment variable is not set."
-    exit 1
-fi
-if [ -z "$BUILDPACK_REPOSITORY_USERNAME" ]; then
-    echo "Error: BUILDPACK_REPOSITORY_USERNAME environment variable is not set."
-    exit 1
-fi
-
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
 # fail hard
@@ -450,17 +441,8 @@ fi
 
 # echo "LD_LIBRARY_PATH set to: $LD_LIBRARY_PATH"
 
-if [ -z "$BUILDPACK_REPOSITORY_PASSWORD" ]; then
-    echo "Error: BUILDPACK_REPOSITORY_PASSWORD environment variable is not set."
-    exit 1
-fi
-if [ -z "$BUILDPACK_REPOSITORY_USERNAME" ]; then
-    echo "Error: BUILDPACK_REPOSITORY_USERNAME environment variable is not set."
-    exit 1
-fi
-
-repositoryUsername=$BUILDPACK_REPOSITORY_USERNAME
-repositoryPassword=$BUILDPACK_REPOSITORY_PASSWORD
+repositoryUsername=${BUILDPACK_REPOSITORY_USERNAME}
+repositoryPassword=${BUILDPACK_REPOSITORY_PASSWORD}
 
 authJson=$(cat <<-END
 {
