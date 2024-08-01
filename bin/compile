@@ -443,6 +443,12 @@ curl -fsSL http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1
 # Extract libssl1.1 package
 dpkg-deb -x $build_dir/libssl1.1.deb $build_dir/.apt
 
+# Make sure that the extracted libraries are in the correct place
+export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+
+# Proceed with the rest of the compile script
+# (add the remaining part of your compile script here)
+
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
 export COMPOSER=composer.json
