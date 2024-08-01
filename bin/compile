@@ -437,10 +437,11 @@ apt-get -o Dir::Etc::sourcelist=$build_dir/.apt/sources.list \
        -o Dir::Cache=$build_dir/.apt/cache \
        update
 
-apt-get -o Dir::State::Lists=$build_dir/.apt/lists \
-       -o Dir::State::Lists::Temporary=$build_dir/.apt/lists/partial \
-       -o Dir::Cache=$build_dir/.apt/cache \
-       install -y --allow-unauthenticated libssl1.1
+# Download libssl1.1 package manually
+curl -fsSL http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.13_amd64.deb -o $build_dir/libssl1.1.deb
+
+# Extract libssl1.1 package
+dpkg-deb -x $build_dir/libssl1.1.deb $build_dir/.apt
 
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
