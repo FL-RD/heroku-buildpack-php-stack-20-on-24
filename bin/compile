@@ -424,17 +424,17 @@ mkdir -p $build_dir/.apt/keyrings
 # fi
 
 status "Downloading libssl1.1.deb..."
-curl -L -o $build_dir/libssl1.1.deb http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb
+curl -sS -L -o $build_dir/libssl1.1.deb http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb
 dpkg-deb -x $build_dir/libssl1.1.deb $build_dir/.apt
 rm $build_dir/libssl1.1.deb
 
 status "Downloading libzip5.deb..."
-curl -L -o $build_dir/libzip5.deb http://mirrors.kernel.org/ubuntu/pool/universe/libz/libzip/libzip5_1.5.1-0ubuntu1_amd64.deb
+curl -sS -L -o $build_dir/libzip5.deb http://mirrors.kernel.org/ubuntu/pool/universe/libz/libzip/libzip5_1.5.1-0ubuntu1_amd64.deb
 dpkg-deb -x $build_dir/libzip5.deb $build_dir/.apt
 rm $build_dir/libzip5.deb
 
 status "Downloading libicu66..."
-curl -L -o $build_dir/libicu66.deb http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu66_66.1-2ubuntu2_amd64.deb
+curl -sS -L -o $build_dir/libicu66.deb http://archive.ubuntu.com/ubuntu/pool/main/i/icu/libicu66_66.1-2ubuntu2_amd64.deb
 dpkg-deb -x $build_dir/libicu66.deb $build_dir/.apt
 rm $build_dir/libicu66.deb
 
@@ -445,9 +445,9 @@ ls -l $build_dir/.apt/usr/lib/x86_64-linux-gnu
 
 # Initialize LD_LIBRARY_PATH if it is not set
 if [ -z "${LD_LIBRARY_PATH:-}" ]; then
-  export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib:$build_dir/.apt/lib/x86_64-linux-gnu
+  export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib:$build_dir/.apt/usr/lib/x86_64-linux-gnu
 else
-  export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib:$build_dir/.apt/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+  export LD_LIBRARY_PATH=$build_dir/.apt/usr/lib:$build_dir/.apt/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 fi
 
 echo "LD_LIBRARY_PATH set to: $LD_LIBRARY_PATH"
