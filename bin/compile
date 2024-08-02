@@ -459,6 +459,7 @@ authJson=$(cat <<-END
 END
 )
 
+
 mkdir -p ~/.composer
 echo "$authJson" > ~/.composer/auth.json
 
