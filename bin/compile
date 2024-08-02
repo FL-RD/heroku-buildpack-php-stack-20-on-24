@@ -441,6 +441,7 @@ fi
 
 # echo "LD_LIBRARY_PATH set to: $LD_LIBRARY_PATH"
 
+# Set Basic Auth to access repository
 export "BUILDPACK_REPOSITORY_USERNAME=$(cat $env_dir/BUILDPACK_REPOSITORY_USERNAME)"
 export "BUILDPACK_REPOSITORY_PASSWORD=$(cat $env_dir/BUILDPACK_REPOSITORY_PASSWORD)"
 repositoryUsername=${BUILDPACK_REPOSITORY_USERNAME}
@@ -458,10 +459,6 @@ authJson=$(cat <<-END
 END
 )
 
-mkdir -p $build_dir/.composer
-echo "$authJson" > $build_dir/.composer/auth.json
-echo "Contents of auth.json:"
-cat $build_dir/.composer/auth.json
 mkdir -p ~/.composer
 echo "$authJson" > ~/.composer/auth.json
 
@@ -477,7 +474,6 @@ export export_file_path=$bp_dir/export
 export profile_dir_path=$build_dir/.profile.d
 export providedextensionslog_file_path=$(mktemp -t "provided-extensions.log.XXXXXX" -u)
 # grep and sed in a subshell with || true, or a failing grep match will cause the exit code to be 1 if "composer install" fails with code 2
-# composer config --global http-basic.dkbc1jgcmso4w.cloudfront.net "$repositoryUsername" "$repositoryPassword"
 if composer install -d "$build_dir/.heroku/php" ${HEROKU_PHP_INSTALL_DEV-"--no-dev"} 2>&1 | tee $build_dir/.heroku/php/install.log | ( grep --line-buffered -E '^  - (Instal|Enab)ling heroku-sys/' | sed -u -E -e 's/^  - (Instal|Enab)ling /- /' -e 's/heroku-sys\///g' || true ) | indent; then
 	:
 else
