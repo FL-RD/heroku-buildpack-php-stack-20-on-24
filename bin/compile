@@ -451,7 +451,7 @@ authJson=$(cat <<-END
     "http-basic": {
         "https://dkbc1jgcmso4w.cloudfront.net": {
             "username": "$repositoryUsername",
-            "password": "$repositoryUsernamev"
+            "password": "$repositoryUsername"
         }
     }
 }
