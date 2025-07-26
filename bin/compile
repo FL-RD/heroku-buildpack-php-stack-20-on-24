@@ -462,6 +462,8 @@ END
 
 mkdir -p ~/.composer
 echo "$authJson" > ~/.composer/auth.json
+echo "=== Dumping auth.json for debug ==="
+echo "$authJson"
 
 # reset $COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
